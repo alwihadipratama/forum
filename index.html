@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran</title>
+    <style>
+    .forum {
+        margin-top: 3rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 16px;
+        width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 2rem 1.5rem 2rem;
+        background: #f9f9f9;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        transition: box-shadow 0.3s;
+    }
+    .forum:hover {
+        box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    }
+    .forum table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 0.7rem;
+    }
+    .forum table tr {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .forum table td {
+        padding: 0.5rem 0.7rem;
+        vertical-align: middle;
+    }
+    .forum label {
+        font-weight: bold;
+        color: #2d6cdf;
+        letter-spacing: 0.5px;
+    }
+    .forum input[type="text"],
+    .forum input[type="date"],
+    .forum input[type="tel"],
+    .forum input[type="email"],
+    .forum input[type="textarea"] {
+        width: 90%;
+        padding: 0.45rem 0.7rem;
+        border-radius: 15px;
+        border: 1px solid #bfc9d1;
+        font-size: 15px;
+        margin-top: 0.2rem;
+        background: #f5f7fa;
+        transition: border 0.2s;
+    }
+    .forum input[type="text"]:focus,
+    .forum input[type="date"]:focus,
+    .forum input[type="tel"]:focus,
+    .forum input[type="email"]:focus,
+    .forum input[type="textarea"]:focus {
+        border: 1.5px solid #2d6cdf;
+        outline: none;
+        background: #fff;
+    }
+    .forum input[type="radio"] {
+        margin-right: 0.3rem;
+        accent-color: #2d6cdf;
+    }
+    .forum button {
+        background: linear-gradient(90deg, #2d6cdf 60%, #4fd1c5 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 20px;
+        padding: 0.7rem 0;
+        margin-top: 1.2rem;
+        width: 100%;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(77,209,197,0.08);
+        transition: background 0.2s, transform 0.2s;
+    }
+    .forum button:hover {
+        background: linear-gradient(90deg, #1b4e9b 60%, #38b2ac 100%);
+        color: #fff;
+        transform: translateY(-2px) scale(1.03);
+    }
+    #greeting {
+        font-size: 18px;
+        margin-bottom: 1.2rem;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+    }
+    .light-mode #greeting {
+        color: #111 !important;
+    }
+    .dark-mode #greeting {
+        color: #fff !important;
+    }
+    nav h2 {
+        text-align: center;
+        color: #2d6cdf;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: 1px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        text-shadow: 0 2px 8px rgba(77,209,197,0.08);
+    }
+    .toggle-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        padding: 10px 15px;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 8px rgba(45,108,223,0.08);
+    }
+    .toggle-button:hover {
+        background-color: #e0e7ff;
+        box-shadow: 0 4px 16px rgba(45,108,223,0.13);
+    }
+    .dark-mode .toggle-button {
+        background-color: #333;
+        color: #fff;
+    }
+    .dark-mode .toggle-button:hover {
+        background-color: #555;
+    }
+    .light-mode {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    .dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    .dark-mode .forum {
+        background: #23272f;
+        border: 1px solid #444;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+    .dark-mode .forum table tr {
+        background: #23272f;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.13);
+    }
+    .dark-mode .forum label {
+        color: #4fd1c5;
+    }
+    .dark-mode .forum input,
+    .dark-mode .forum input:focus {
+        background: #181b20;
+        color: #fff;
+        border: 1px solid #4fd1c5;
+    }
+    .dark-mode .forum button {
+        background: linear-gradient(90deg, #4fd1c5 60%, #2d6cdf 100%);
+    }
+    .dark-mode .forum button:hover {
+        background: linear-gradient(90deg, #38b2ac 60%, #1b4e9b 100%);
+    }
+    .dark-mode nav h2 {
+        color: #4fd1c5;
+        text-shadow: 0 2px 8px rgba(45,108,223,0.13);
+    }
+    @media screen and (max-width: 480px) {
+        .forum {
+            width: 98vw;
+            padding: 0.7rem;
+            font-size: 13px;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        .forum table,
+        .forum table tr,
+        .forum table td {
+            display: block;
+            width: 100%;
+        }
+        .forum table tr {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+            box-shadow: none;
+            background: transparent;
+        }
+        .forum table td {
+            padding: 0.2rem 0;
+        }
+        .forum label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .forum input[type="text"],
+        .forum input[type="date"],
+        .forum input[type="tel"],
+        .forum input[type="email"],
+        .forum input[type="textarea"] {
+            width: 100%;
+            padding: 0.4rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.2rem;
+            border-radius: 4px;
+            border: 1px solid #bfc9d1;
+            font-size: 13px;
+            box-sizing: border-box;
+            background: #f5f7fa;
+        }
+        .forum button {
+            width: 100%;
+            font-size: 16px;
+            margin-top: 1rem;
+        }
+        nav h2 {
+            font-size: 18px;
+            margin-bottom: 1rem;
+        }
+        .toggle-button {
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            padding: 7px 10px;
+        }
+        #greeting {
+            font-size: 18px;
+            margin-bottom: 0.7rem;
+            text-align: center;
+        }
+    }
+    </style>
+</head>
+<body>
+    <Nav>
+        <h2>Forum Pendaftaran Mahasiswa</h2>
+    </Nav>
+    <div class="light-mode">
+         <button class="toggle-button" id="modeToggle">🌙</button>
+    </div>
+
+    <div class="forum">
+        <p id="greeting"></p>
+        <table>
+            <tr>
+                <td>
+                    <label for="nama">Nama</label>
+                </td>
+                <td>
+                    <input type="text" id="nameInput" placeholder="Nama lengkap">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Tempat Tgl Lahir</label>
+                </td>
+                <td>
+                    <input type="text" placeholder="Tempat lahir"> <input type="date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="jk">Jenis Kelamin</label>
+                </td>
+                <td>
+                    <input type="radio" name="jk" value="Laki-Laki">Laki-Laki <br><input type="radio" name="jk" value="Perempuan">Perempuan 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="alamat">Alamat</label>
+                </td>
+                <td>
+                    <input type="textarea" placeholder="Alamat lengkap">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="agama"> Agama</label>
+                </td>
+                <td>
+                    <input type="text" placeholder="Agama">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">No. HP</label>
+                </td>
+                <td>
+                    <input type="tel" name="no-hp" placeholder="Masukkan no_hp">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">Email</label>
+                </td>
+                <td>
+                    <input type="email" name="email" placeholder="Masukkan email">
+                </td>
+            </tr>
+        </table>
+        <button id="simpanBtn">simpan</button>
+        <div id="successMsg"></div>
+
+    </div>
+    
+    <script>
+        const body = document.body;
+        const button = document.getElementById("modeToggle");
+
+        function updateIcon() {
+            if (body.classList.contains("dark-mode")) {
+                button.textContent = "🌙";
+            } else {
+                button.textContent = "🌞";
+            }
+        }
+
+        function toggleMode() {
+            body.classList.toggle("dark-mode");
+            body.classList.toggle("light-mode");
+            updateIcon();
+        }
+
+        button.addEventListener("click", toggleMode);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById("nameInput");
+            const greeting = document.getElementById("greeting");
+
+            input.addEventListener("input", function () {
+                const name = input.value.trim();
+                if (name.length > 0) {
+                greeting.textContent = `Selamat Datang, ${name}!`;
+                } else {
+                greeting.textContent = "";
+                }
+            });
+        });
+        document.getElementById("simpanBtn").addEventListener("click", function() {
+            const msg = document.getElementById("successMsg");
+            msg.textContent = "Data berhasil disimpan!";
+            msg.style.color = "red";
+            
+            msg.style.fontWeight = "bold";
+            msg.style.marginTop = "1rem";
+        });
+    </script>
+</body>
+</html>
